@@ -1,0 +1,35 @@
+#! /bin/bash -e
+
+FROM='reminder@mag.lab.sh'
+#RCPT='c4fd@lists.open-mail.net'
+RCPT='fooker@lab.sh'
+
+DATE=$(date --date 'now 3 days' '+%Y-%m-%d')
+EVENT="$(grep -e "^${DATE}" events)"
+
+# Check if we found an event
+if [[ -z "${EVENT}" ]]; then
+  exit 0
+fi
+
+# Split the event into variables
+  IFS=$(echo -en "\t") \
+	read \
+	DATE \
+	TIME \
+	LOCATION \
+	SUBJECT \
+  <<< "${EVENT}"
+
+# Read the template
+TEMPLATE="$(cat template)"
+
+# Generate the message
+MESSAGE=$(eval echo "\"${TEMPLATE}\"")
+
+# Send the message
+sendmail \
+  -f "${FROM}" \
+  "${RCPT}" \
+  <<< "${MESSAGE}"
+
