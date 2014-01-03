@@ -9,10 +9,14 @@ RCPT='c4fd@lists.open-mail.net'
 # The time  to notify before the event occures
 LOOKAHEAD='3 days'
 
+# The download URL for the vent list
+URL='https://wiki.mag.lab.sh/wiki/Reminder/Events?action=raw'
+
 ################################################################################
 
 DATE=$(date --date "now ${LOOKAHEAD}" '+%Y-%m-%d')
-EVENT="$(grep -e "^${DATE}" events)"
+EVENT="$(curl -k "${URL}" | \
+				 grep -e "^ *${DATE}")"
 
 # Check if we found an event
 if [[ -z "${EVENT}" ]]; then
