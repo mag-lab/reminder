@@ -27,7 +27,7 @@ TEMPLATE="$(cat template)"
 MESSAGE=$(eval echo "\"${TEMPLATE}\"")
 
 # Send the message
-sendmail \
+/usr/sbin/sendmail \
   -f "${FROM}" \
   "${RCPT}" \
   <<< "${MESSAGE}"
