@@ -1,8 +1,7 @@
 #! /bin/bash -e
 
 FROM='reminder@mag.lab.sh'
-#RCPT='c4fd@lists.open-mail.net'
-RCPT='fooker@lab.sh'
+RCPT='c4fd@lists.open-mail.net'
 
 DATE=$(date --date 'now 3 days' '+%Y-%m-%d')
 EVENT="$(grep -e "^${DATE}" events)"
