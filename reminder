@@ -1,9 +1,17 @@
 #! /bin/bash -e
 
+# The sending mail address
 FROM='reminder@mag.lab.sh'
+
+# The target mail address
 RCPT='c4fd@lists.open-mail.net'
 
-DATE=$(date --date 'now 3 days' '+%Y-%m-%d')
+# The time  to notify before the event occures
+LOOKAHEAD='3 days'
+
+################################################################################
+
+DATE=$(date --date "now ${LOOKAHEAD}" '+%Y-%m-%d')
 EVENT="$(grep -e "^${DATE}" events)"
 
 # Check if we found an event
