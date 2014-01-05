@@ -16,7 +16,8 @@ URL='https://wiki.mag.lab.sh/wiki/Reminder/Events?action=raw'
 
 DATE=$(date --date "now ${LOOKAHEAD}" '+%Y-%m-%d')
 EVENT="$(curl -q -k "${URL}" | \
-				 grep -e "^ *${DATE}")"
+				 grep -e "^ *${DATE}" | \
+				 sed 's/^ *//')"
 
 # Check if we found an event
 if [[ -z "${EVENT}" ]]; then
