@@ -4,7 +4,7 @@
 FROM='reminder@mag.lab.sh'
 
 # The target mail address
-RCPT='c4fd@lists.open-mail.net'
+RCPT='mag.lab@lists.open-mail.net'
 
 # The time  to notify before the event occures
 LOOKAHEAD='3 days'
